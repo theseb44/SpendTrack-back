@@ -2,7 +2,8 @@ package com.Backend.SpendTrack.GastosCrud.Models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -13,11 +14,11 @@ public class Gastos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "idCliente")
+    @Column(name = "id_cliente")
     private Long idCliente;//temporal mientras resolvemos la composicion
 
     @Column(name = "fecha")
-    private LocalDate fecha;
+    private LocalDateTime fecha;
 
     @Column(name = "categoria")
     private String categoria;
@@ -25,7 +26,7 @@ public class Gastos {
     @Column(name = "cantidad")
     private int cantidad;
 
-    @Column(name = "tipoPago")
+    @Column(name = "tipo_pago")
     private String tipoPago;
 
     @Column(name = "descripcion")
@@ -47,11 +48,11 @@ public class Gastos {
         this.idCliente = idCliente;
     }
 
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
