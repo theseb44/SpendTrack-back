@@ -1,41 +1,50 @@
 package com.Backend.SpendTrack.Presupuesto.Controllers;
 
-import com.Backend.SpendTrack.Presupuesto.Model.Presupuesto;
+import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
 import com.Backend.SpendTrack.Presupuesto.Services.PresupuestoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/presupuesto")
+@RequestMapping("/api/v1/presupuestos")
 public class PresupuestoController {
+    private final PresupuestoService presupuestoService;
+
     @Autowired
-    private PresupuestoService presupuestoService;
+    public PresupuestoController(PresupuestoService presupuestoService) {
+        this.presupuestoService = presupuestoService;
+    }
+
     @GetMapping
-    public List<Presupuesto> getAllPresupuestos(){
+    public List<Presupuesto> getAllPresupuestos() {
         return presupuestoService.getAllPresupuestos();
     }
 
-    @GetMapping(path = "/{id}")
-    public Optional<Presupuesto> getPresupuesto(@PathVariable("id") Long id){
-        return presupuestoService.getPresupuesto(id);
+    @GetMapping("/{id}")
+    public Presupuesto getPresupuestoById(@PathVariable Long id) {
+        return presupuestoService.getPresupuestoById(id);
     }
 
-    @PostMapping
-    public Presupuesto createPresupuesto(@RequestBody Presupuesto presupuesto){
-        return presupuestoService.createPresupuesto(presupuesto);
+    @PostMapping("/{clienteId}")
+    public Presupuesto createPresupuesto(@PathVariable Long clienteId, @RequestBody Presupuesto presupuesto) {
+        return presupuestoService.createPresupuesto(clienteId, presupuesto);
     }
 
-    @PutMapping(path = "/{id}")
-    public Presupuesto updatePresupuesto(@PathVariable("id") Long id,@RequestBody Presupuesto bodyPresupuesto){
-        return presupuestoService.updatePresupuestoById(id, bodyPresupuesto);
+    @PutMapping("/{id}")
+    public Presupuesto updatePresupuesto(@PathVariable Long id, @RequestBody Presupuesto presupuesto) {
+        return presupuestoService.updatePresupuesto(id, presupuesto);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public boolean deletePresupuesto(@PathVariable("id") Long id){
-        return presupuestoService.deletePresupuesto(id);
+    @DeleteMapping("/{id}")
+    public void deletePresupuesto(@PathVariable Long id) {
+        presupuestoService.deletePresupuesto(id);
+    }
+
+    @GetMapping("/cliente/{clienteId}")
+    public List<Presupuesto> getPresupuestosByClienteId(@PathVariable Long clienteId) {
+        return presupuestoService.getPresupuestosByClienteId(clienteId);
     }
 
 }
