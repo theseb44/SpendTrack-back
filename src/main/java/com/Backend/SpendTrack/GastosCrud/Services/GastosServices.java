@@ -24,6 +24,16 @@ public class GastosServices {
         return gastoRepo.findById(id).isPresent();
     }
 
+    private boolean validarGastos(Gastos gastos) {
+        if(gastos == null){return false;}
+        if (gastos.getFecha() == null) {return false;}
+        if (gastos.getCategoria() == null || gastos.getCategoria().isEmpty()) {return false;}
+        if (gastos.getCantidad() <= 0) {return false;}
+        if (gastos.getTipoPago() == null || gastos.getTipoPago().isEmpty()) {return false;}
+        if (gastos.getDescripcion() == null || gastos.getDescripcion().isEmpty()) {return false;}
+
+        return true;
+    }
 
     public List<Gastos> getAllGasto() {
         try {
@@ -43,6 +53,7 @@ public class GastosServices {
     }
 
     public Gastos createGasto(Long clienteId, Gastos gasto) {
+        if(!validarGastos(gasto)){return null;}
         try {
             Cliente cliente = clienteRepo.findById(clienteId).orElse(null);
             if (cliente != null) {
@@ -56,6 +67,8 @@ public class GastosServices {
     }
 
     public Gastos updateGasto(Long id, Gastos gasto) {
+        if(!validarGastos(gasto)){return null;}
+        if(!buscar(id)){return null;}
         try {
             gasto.setId(id);
             return gastoRepo.save(gasto);
@@ -65,6 +78,7 @@ public class GastosServices {
     }
 
     public void deleteGasto(Long id) {
+        if(!buscar(id)){return;}
         try {
             gastoRepo.deleteById(id);
         }catch (Exception e){

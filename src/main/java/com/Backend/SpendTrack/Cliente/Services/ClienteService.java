@@ -28,47 +28,98 @@ public class ClienteService {
     @Autowired
     private PresupuestoRepository presupuestoRepository;
 
+    public boolean buscar(Long id){
+        return clienteRepository.findById(id).isPresent();
+    }
+
+    public boolean validarCliente(Cliente cliente) {
+        if (cliente == null) {return false;}
+        if (cliente.getNombre() == null || cliente.getNombre().isEmpty()) {return false;}
+        if (cliente.getApellidos() == null || cliente.getNombre().isEmpty()) {return false;}
+        if (cliente.getCiudad()== null || cliente.getCiudad().isEmpty()) {return false;}
+        if (cliente.getCorreo() == null || cliente.getCiudad().isEmpty()) {return false;}
+
+        return true;
+    }
+
     public List<Cliente> getAllClientes() {
-        return clienteRepository.findAll();
+        try {
+            return clienteRepository.findAll();
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener todos los clientes",e);
+        }
     }
 
     public Cliente getClienteById(Long id) {
-        return clienteRepository.findById(id).orElse(null);
+        if(!buscar(id)){return null;}
+        try {
+            return clienteRepository.findById(id).orElse(null);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener el cliente",e);
+        }
     }
 
     public Cliente createCliente(Cliente cliente) {
-        return clienteRepository.save(cliente);
+        if (!validarCliente(cliente)){return null;}
+        try {
+            return clienteRepository.save(cliente);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al crear el cliente",e);
+        }
     }
 
     public Cliente updateCliente(Long id, Cliente cliente) {
-        cliente.setId(id);
-        return clienteRepository.save(cliente);
+        if (!validarCliente(cliente)){return null;}
+        if(!buscar(id)){return null;}
+        try {
+            cliente.setId(id);
+            return clienteRepository.save(cliente);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al actualizar un cliente",e);
+        }
     }
 
     public void deleteCliente(Long id) {
-        clienteRepository.deleteById(id);
+        if(!buscar(id)){return;}
+        try {
+            clienteRepository.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al eliminar un cliente",e);
+        }
     }
 
     public List<Presupuesto> getPresupuestosByClienteId(Long clienteId) {
-        Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
-        if (cliente != null) {
-            return presupuestoRepository.findByClienteId(clienteId);
+        try {
+            Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+            if (cliente != null) {
+                return presupuestoRepository.findByClienteId(clienteId);
+            }
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener al presupuestos del cliente",e);
         }
         return null;
     }
 
     public List<Gastos> getGastoByClienteId(Long clienteId) {
-        Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
-        if (cliente != null) {
-            return gastoRepo.findByClienteId(clienteId);
+        try {
+            Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+            if (cliente != null) {
+                return gastoRepo.findByClienteId(clienteId);
+            }
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener gastos del cliente",e);
         }
         return null;
     }
 
     public List<Recordatorio> getRecordatorioByClienteId(Long clienteId) {
-        Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
-        if (cliente != null) {
-            return recordatoriosRepo.findByClienteId(clienteId);
+        try {
+            Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+            if (cliente != null) {
+                return recordatoriosRepo.findByClienteId(clienteId);
+            }
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener los recordatorios del cliente",e);
         }
         return null;
     }

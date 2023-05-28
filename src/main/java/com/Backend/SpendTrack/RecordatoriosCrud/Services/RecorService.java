@@ -25,7 +25,7 @@ public class RecorService {
         try {
             return (ArrayList<Recordatorio>) iRecordatorios.findAll();
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
+            throw new RuntimeException("Ocurrio en error al obtener todos los recordatorios", e);
         }
     }
 
@@ -33,17 +33,25 @@ public class RecorService {
         return iRecordatorios.findById(id).isPresent();
     }
 
+    public boolean validarRecordatorio(Recordatorio recordatorio) {
+        if (recordatorio == null) {return false;}
+        if (recordatorio.getTitulo() == null || recordatorio.getTitulo().isEmpty()) {return false;}
+        if (recordatorio.getDescripcion()== null || recordatorio.getDescripcion().isEmpty()) {return false;}
+
+        return true;
+    }
+
     public Recordatorio getRecordatorio(Long id){
         if(!buscar(id)){return null;}
         try{
             return iRecordatorios.findById(id).get();
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
+            throw new RuntimeException("Ocurrio en error al obtener el recordatorio", e);
         }
     }
 
     public Boolean createRecordatorio(Long clienteId, Recordatorio recor){
-        if(recor == null){return false;}
+        if(!validarRecordatorio(recor)){return false;}
         try{
             Cliente cliente = clienteRepo.findById(clienteId).orElse(null);
             if (cliente != null) {
@@ -52,7 +60,7 @@ public class RecorService {
                 return true;
             }
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
+            throw new RuntimeException("Ocurrio en error al crear el recordatorio", e);
         }
         return false;
     }
@@ -60,12 +68,12 @@ public class RecorService {
 
     public Recordatorio updateRecordatorio(Recordatorio request, Long id){
         if(!buscar(id)){return null;}
-        if(request == null){return null;}
+        if(!validarRecordatorio(request)){return null;}
         try{
             request.setId(id);
             return iRecordatorios.save(request);
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
+            throw new RuntimeException("Ocurrio en error al actualizar el recordatorio", e);
         }
     }
 
@@ -75,7 +83,7 @@ public class RecorService {
             iRecordatorios.deleteById(id);
             return true;
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
+            throw new RuntimeException("Ocurrio en error al eliminar un recordatorio", e);
         }
     }
 
@@ -83,7 +91,7 @@ public class RecorService {
         try {
             return iRecordatorios.findByClienteId(clienteId);
         }catch (Exception e){
-            throw new RuntimeException("Ocurrio un error al obtener gastos del cliente",e);
+            throw new RuntimeException("Ocurrio un error al obtener los recordatorios del cliente",e);
         }
     }
 }

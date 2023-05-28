@@ -4,6 +4,7 @@ import com.Backend.SpendTrack.Cliente.Models.Cliente;
 import com.Backend.SpendTrack.Cliente.Services.ClienteService;
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
 import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
+import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +53,10 @@ public class ClienteController {
     @GetMapping("/{clienteId}/gastos")
     public List<Gastos> getGastosByClienteId(@PathVariable Long clienteId) {
         return clienteService.getGastoByClienteId(clienteId);
+    }
+
+    @GetMapping
+    public List<Recordatorio> getRecordatorioByClienteId(@PathVariable Long clienteId) {
+        return clienteService.getRecordatorioByClienteId(clienteId);
     }
 }
