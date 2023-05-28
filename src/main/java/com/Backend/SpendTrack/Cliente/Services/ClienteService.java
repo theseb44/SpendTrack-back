@@ -123,4 +123,13 @@ public class ClienteService {
         }
         return null;
     }
+
+    public Cliente ValidarLogin(String correo, String password){
+        try{
+            Cliente x = clienteRepository.findByCorreoAndPassword(correo, password);
+            return x;
+        }catch (Exception e) {
+            throw new RuntimeException("Ocurrio un error al validar el login", e);
+        }
+    }
 }

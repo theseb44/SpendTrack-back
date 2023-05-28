@@ -1,7 +1,7 @@
 package com.Backend.SpendTrack.Cliente.Models;
 
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
-import com.Backend.SpendTrack.Models.Persona;
+import com.Backend.SpendTrack.Models.Usuario;
 import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "clientes")
-public class Cliente extends Persona{
+public class Cliente extends Usuario {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnore

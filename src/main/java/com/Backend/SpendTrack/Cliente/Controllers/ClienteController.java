@@ -55,8 +55,13 @@ public class ClienteController {
         return clienteService.getGastoByClienteId(clienteId);
     }
 
-    @GetMapping
+    @GetMapping("/{clienteId}/recordatorios")
     public List<Recordatorio> getRecordatorioByClienteId(@PathVariable Long clienteId) {
         return clienteService.getRecordatorioByClienteId(clienteId);
+    }
+
+    @PostMapping(path = "/login/{correo}/{password}")
+    public Cliente ValidarLogin(@PathVariable("correo") String correo, @PathVariable("password") String password){
+        return clienteService.ValidarLogin(correo,password);
     }
 }

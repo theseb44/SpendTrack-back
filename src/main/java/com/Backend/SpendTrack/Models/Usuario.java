@@ -11,11 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Persona {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "nombre")
     private String nombre;
