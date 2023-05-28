@@ -1,5 +1,7 @@
 package com.Backend.SpendTrack.RecordatoriosCrud.Models;
 
+import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +12,10 @@ public class Recordatorio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_cliente")
-    private Long idCliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    @JsonBackReference
+    private Cliente cliente;
 
     @Column(name = "titulo")
     private String titulo;
@@ -27,12 +31,12 @@ public class Recordatorio {
         this.id = id;
     }
 
-    public Long getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getTitulo() {

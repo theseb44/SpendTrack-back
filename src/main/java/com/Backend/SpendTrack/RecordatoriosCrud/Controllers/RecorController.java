@@ -1,11 +1,13 @@
 package com.Backend.SpendTrack.RecordatoriosCrud.Controllers;
 
+import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import com.Backend.SpendTrack.RecordatoriosCrud.Services.RecorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/recordatorios")
@@ -24,9 +26,9 @@ public class RecorController {
         return recorService.getRecordatorio(id);
     }
 
-    @PostMapping
-    public boolean post(@RequestBody Recordatorio recor){
-        return recorService.createRecordatorio(recor);
+    @PostMapping(path = "/{clienteId}")
+    public boolean post(@PathVariable Long clienteId, @RequestBody Recordatorio recor){
+        return recorService.createRecordatorio(clienteId, recor);
     }
 
     @PutMapping(path = "/{id}")
@@ -37,5 +39,10 @@ public class RecorController {
     @DeleteMapping(path = "/{id}")
     public boolean delete(@PathVariable("id") Long id){
         return recorService.deleteRecordatorio(id);
+    }
+
+    @GetMapping("/cliente/{clienteId}")
+    public List<Recordatorio> getRecordatorioByClienteId(@PathVariable Long clienteId) {
+        return recorService.getRecordatoriosByClienteId(clienteId);
     }
 }
