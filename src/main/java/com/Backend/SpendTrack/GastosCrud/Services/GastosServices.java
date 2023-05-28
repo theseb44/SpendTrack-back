@@ -1,5 +1,7 @@
 package com.Backend.SpendTrack.GastosCrud.Services;
 
+import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
 import com.Backend.SpendTrack.GastosCrud.Repositories.IGastos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,74 +10,73 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GastosServices {
 
     @Autowired
-    private IGastos iGastos;
+    private IGastos gastoRepo;
 
+    @Autowired
+    private ClienteRepository clienteRepo;
     private boolean buscar(Long id){
-        return iGastos.findById(id).isPresent();
+        return gastoRepo.findById(id).isPresent();
     }
 
 
-    public ArrayList<Gastos> getAllGastos(){
-        return (ArrayList<Gastos>) iGastos.findAll();
-    }
-
-    public Gastos getGasto(Long id){
-
-        if(!buscar(id)){
-            return null;
-        }
-        try {//necesarios para manejar errores de base de datos
-            return iGastos.findById(id).get();
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    public Boolean createGasto(Gastos gasto){
-        if (gasto == null) {return false;}
+    public List<Gastos> getAllGasto() {
         try {
-            LocalDateTime fechaActual = LocalDateTime.now();//obtiene la fecha actual
-            gasto.setFecha(fechaActual);
-            iGastos.save(gasto);
-            return true;
-        } catch (Exception e) {
-            return false;
+            return gastoRepo.findAll();
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio en error al obtener todos los gastos", e);
         }
     }
-    private Gastos update(Gastos request, Gastos gasto){// asigna los valores del request en el objeto en DB
 
-        LocalDateTime fechaActual = LocalDateTime.now();//obtiene la fecha actual
-        gasto.setFecha(fechaActual);
-        gasto.setCategoria(request.getCategoria());
-        gasto.setCantidad(request.getCantidad());
-        gasto.setDescripcion(request.getDescripcion());
-        gasto.setTipoPago(request.getTipoPago());
-        createGasto(gasto);
-        return gasto;//gasto actualizado
-    }
-    public Gastos updateGasto(Gastos request, Long id ){
-        if(request == null){return null;}
+    public Gastos getGastoById(Long id) {
         if(!buscar(id)){return null;}
-        try{
-            Gastos gasto = getGasto(id);
-            return update(request, gasto);
+        try {
+            return gastoRepo.findById(id).orElse(null);
         }catch (Exception e){
-            return null;
+            throw new RuntimeException("Ocurrio en error al obtener el gasto", e);
         }
     }
 
-    public Boolean deleteGasto(Long id){
-        if(!buscar(id)){return false;}
-        try{
-            iGastos.deleteById(id);
-            return true;
+    public Gastos createGasto(Long clienteId, Gastos gasto) {
+        try {
+            Cliente cliente = clienteRepo.findById(clienteId).orElse(null);
+            if (cliente != null) {
+                gasto.setCliente(cliente);
+                return gastoRepo.save(gasto);
+            }
         }catch (Exception e){
-            return false;
+            throw new RuntimeException("Ocurrio un error al crear el gasto",e);
+        }
+        return null;
+    }
+
+    public Gastos updateGasto(Long id, Gastos gasto) {
+        try {
+            gasto.setId(id);
+            return gastoRepo.save(gasto);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al actualizar el gasto",e);
+        }
+    }
+
+    public void deleteGasto(Long id) {
+        try {
+            gastoRepo.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al eliminar el gasto",e);
+        }
+    }
+
+    public List<Gastos> getGastoByClienteId(Long clienteId) {
+        try {
+            return gastoRepo.findByClienteId(clienteId);
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrio un error al obtener gastos del cliente",e);
         }
     }
 }

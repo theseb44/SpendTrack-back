@@ -1,5 +1,7 @@
 package com.Backend.SpendTrack.GastosCrud.Models;
 
+import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -14,8 +16,10 @@ public class Gastos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_cliente")
-    private Long idCliente;//temporal mientras resolvemos la composicion
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    @JsonBackReference
+    private Cliente cliente;
 
     @Column(name = "fecha")
     private LocalDateTime fecha;
@@ -32,20 +36,20 @@ public class Gastos {
     @Column(name = "descripcion")
     private String descripcion;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
     }
 
     public LocalDateTime getFecha() {

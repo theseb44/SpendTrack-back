@@ -2,6 +2,8 @@ package com.Backend.SpendTrack.Cliente.Services;
 
 import com.Backend.SpendTrack.Cliente.Models.Cliente;
 import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
+import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
+import com.Backend.SpendTrack.GastosCrud.Repositories.IGastos;
 import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
 import com.Backend.SpendTrack.Presupuesto.Repositories.PresupuestoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private IGastos gastoRepo;
     @Autowired
     private PresupuestoRepository presupuestoRepository;
 
@@ -43,6 +47,14 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
         if (cliente != null) {
             return presupuestoRepository.findByClienteId(clienteId);
+        }
+        return null;
+    }
+
+    public List<Gastos> getGastoByClienteId(Long clienteId) {
+        Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+        if (cliente != null) {
+            return gastoRepo.findByClienteId(clienteId);
         }
         return null;
     }

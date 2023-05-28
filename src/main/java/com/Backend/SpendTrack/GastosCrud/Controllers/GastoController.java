@@ -6,34 +6,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/gasto")
 public class GastoController {
 
     @Autowired
-    private GastosServices gastosServices;
+    private GastosServices gastosService;
+
     @GetMapping
-    public ArrayList<Gastos> getAll(){
-        return gastosServices.getAllGastos();
+    public List<Gastos> getAllPresupuestos() {
+        return gastosService.getAllGasto();
     }
 
-    @GetMapping(path = "/{id}")
-    public Gastos get(@PathVariable("id") Long id){
-        return gastosServices.getGasto(id);
+    @GetMapping("/{id}")
+    public Gastos getPresupuestoById(@PathVariable Long id) {
+        return gastosService.getGastoById(id);
     }
 
-    @PostMapping
-    public boolean post(@RequestBody Gastos gasto){
-        return gastosServices.createGasto(gasto);
+    @PostMapping("/{clienteId}")
+    public Gastos createPresupuesto(@PathVariable Long clienteId, @RequestBody Gastos gastos) {
+        return gastosService.createGasto(clienteId, gastos);
     }
-    @PutMapping(path = "/{id}")
-    public Gastos update(@RequestBody Gastos request, @PathVariable("id") Long id){
-        return gastosServices.updateGasto(request, id);
+
+    @PutMapping("/{id}")
+    public Gastos updatePresupuesto(@PathVariable Long id, @RequestBody Gastos gastos) {
+        return gastosService.updateGasto(id, gastos);
     }
-    @DeleteMapping(path = "/{id}")
-    public boolean delete(@PathVariable("id") Long id){
-        return gastosServices.deleteGasto(id);
+
+    @DeleteMapping("/{id}")
+    public void deletePresupuesto(@PathVariable Long id) {
+        gastosService.deleteGasto(id);
+    }
+
+    @GetMapping("/cliente/{clienteId}")
+    public List<Gastos> getGastoByClienteId(@PathVariable Long clienteId) {
+        return gastosService.getGastoByClienteId(clienteId);
     }
 
 }
