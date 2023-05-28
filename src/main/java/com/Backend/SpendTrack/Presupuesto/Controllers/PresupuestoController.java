@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/presupuestos")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class PresupuestoController {
     private final PresupuestoService presupuestoService;
 
