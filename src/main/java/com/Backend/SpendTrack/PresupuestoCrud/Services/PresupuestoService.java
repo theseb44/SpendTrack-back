@@ -1,9 +1,9 @@
-package com.Backend.SpendTrack.Presupuesto.Services;
+package com.Backend.SpendTrack.PresupuestoCrud.Services;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
-import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
-import com.Backend.SpendTrack.Presupuesto.Repositories.PresupuestoRepository;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Repositories.ClienteRepository;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
+import com.Backend.SpendTrack.PresupuestoCrud.Repositories.PresupuestoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

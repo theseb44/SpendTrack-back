@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/gasto")
+@RequestMapping("/api/v1/gastos")
 @CrossOrigin
 public class GastoController {
 
@@ -41,7 +41,7 @@ public class GastoController {
         gastosService.deleteGasto(id);
     }
 
-    @GetMapping("/cliente/{clienteId}")
+    @GetMapping("/clientes/{clienteId}")
     public List<Gastos> getGastoByClienteId(@PathVariable Long clienteId) {
         return gastosService.getGastoByClienteId(clienteId);
     }

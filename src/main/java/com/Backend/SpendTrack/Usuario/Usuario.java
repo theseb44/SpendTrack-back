@@ -1,4 +1,4 @@
-package com.Backend.SpendTrack.Models;
+package com.Backend.SpendTrack.Usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +30,6 @@ public class Usuario {
     @Column(name = "ciudad")
     private String ciudad;
 
-    @Column(name = "correo")
+    @Column(name = "correo",unique = true)
     private String correo;
 }

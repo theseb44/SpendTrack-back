@@ -1,13 +1,13 @@
-package com.Backend.SpendTrack.Presupuesto.Models;
+package com.Backend.SpendTrack.PresupuestoCrud.Models;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +25,7 @@ public class Presupuesto {
     private Cliente cliente;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "categoria")
     private String categoria;

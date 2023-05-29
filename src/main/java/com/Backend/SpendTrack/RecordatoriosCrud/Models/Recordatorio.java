@@ -1,6 +1,6 @@
 package com.Backend.SpendTrack.RecordatoriosCrud.Models;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 

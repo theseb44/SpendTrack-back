@@ -1,8 +1,8 @@
-package com.Backend.SpendTrack.Cliente.Models;
+package com.Backend.SpendTrack.ClienteCrud.Models;
 
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
-import com.Backend.SpendTrack.Models.Usuario;
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
+import com.Backend.SpendTrack.Usuario.Usuario;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

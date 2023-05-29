@@ -42,7 +42,7 @@ public class RecorController {
         return recorService.deleteRecordatorio(id);
     }
 
-    @GetMapping("/cliente/{clienteId}")
+    @GetMapping("/clientes/{clienteId}")
     public List<Recordatorio> getRecordatorioByClienteId(@PathVariable Long clienteId) {
         return recorService.getRecordatoriosByClienteId(clienteId);
     }

@@ -1,9 +1,9 @@
-package com.Backend.SpendTrack.Cliente.Controllers;
+package com.Backend.SpendTrack.ClienteCrud.Controllers;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
-import com.Backend.SpendTrack.Cliente.Services.ClienteService;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Services.ClienteService;
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/cliente")
+@RequestMapping("/api/v1/clientes")
 @CrossOrigin
 public class ClienteController {
     private final ClienteService clienteService;

@@ -1,7 +1,7 @@
-package com.Backend.SpendTrack.Presupuesto.Controllers;
+package com.Backend.SpendTrack.PresupuestoCrud.Controllers;
 
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
-import com.Backend.SpendTrack.Presupuesto.Services.PresupuestoService;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
+import com.Backend.SpendTrack.PresupuestoCrud.Services.PresupuestoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +43,7 @@ public class PresupuestoController {
         presupuestoService.deletePresupuesto(id);
     }
 
-    @GetMapping("/cliente/{clienteId}")
+    @GetMapping("/clientes/{clienteId}")
     public List<Presupuesto> getPresupuestosByClienteId(@PathVariable Long clienteId) {
         return presupuestoService.getPresupuestosByClienteId(clienteId);
     }

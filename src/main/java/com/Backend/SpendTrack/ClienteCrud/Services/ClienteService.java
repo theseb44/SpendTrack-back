@@ -1,11 +1,11 @@
-package com.Backend.SpendTrack.Cliente.Services;
+package com.Backend.SpendTrack.ClienteCrud.Services;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
-import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Repositories.ClienteRepository;
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
 import com.Backend.SpendTrack.GastosCrud.Repositories.IGastos;
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
-import com.Backend.SpendTrack.Presupuesto.Repositories.PresupuestoRepository;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
+import com.Backend.SpendTrack.PresupuestoCrud.Repositories.PresupuestoRepository;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import com.Backend.SpendTrack.RecordatoriosCrud.Repositories.IRecordatorios;
 import org.springframework.beans.factory.annotation.Autowired;

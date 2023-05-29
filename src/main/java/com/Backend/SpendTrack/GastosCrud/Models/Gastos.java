@@ -1,11 +1,11 @@
 package com.Backend.SpendTrack.GastosCrud.Models;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Entity
@@ -22,7 +22,7 @@ public class Gastos {
     private Cliente cliente;
 
     @Column(name = "fecha")
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "categoria")
     private String categoria;
@@ -52,11 +52,11 @@ public class Gastos {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

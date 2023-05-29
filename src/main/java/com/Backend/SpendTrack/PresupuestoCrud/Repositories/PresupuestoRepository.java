@@ -1,6 +1,6 @@
-package com.Backend.SpendTrack.Presupuesto.Repositories;
+package com.Backend.SpendTrack.PresupuestoCrud.Repositories;
 
-import com.Backend.SpendTrack.Presupuesto.Models.Presupuesto;
+import com.Backend.SpendTrack.PresupuestoCrud.Models.Presupuesto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

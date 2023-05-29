@@ -1,8 +1,7 @@
 package com.Backend.SpendTrack.RecordatoriosCrud.Services;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
-import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
-import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Repositories.ClienteRepository;
 import com.Backend.SpendTrack.RecordatoriosCrud.Models.Recordatorio;
 import com.Backend.SpendTrack.RecordatoriosCrud.Repositories.IRecordatorios;
 import org.springframework.beans.factory.annotation.Autowired;

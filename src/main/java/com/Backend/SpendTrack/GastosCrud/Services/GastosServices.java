@@ -1,15 +1,12 @@
 package com.Backend.SpendTrack.GastosCrud.Services;
 
-import com.Backend.SpendTrack.Cliente.Models.Cliente;
-import com.Backend.SpendTrack.Cliente.Repositories.ClienteRepository;
+import com.Backend.SpendTrack.ClienteCrud.Models.Cliente;
+import com.Backend.SpendTrack.ClienteCrud.Repositories.ClienteRepository;
 import com.Backend.SpendTrack.GastosCrud.Models.Gastos;
 import com.Backend.SpendTrack.GastosCrud.Repositories.IGastos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
