@@ -18,27 +18,27 @@ public class RecorController {
     private RecorService recorService;
 
     @GetMapping
-    public ArrayList<Recordatorio> GetAll(){
+    public ArrayList<Recordatorio> GetAllRecordatorios(){
         return recorService.GetAllRecordatorios();
     }
 
     @GetMapping(path = "/{id}")
-    public Recordatorio get(@PathVariable("id")Long id){
+    public Recordatorio getRecordatorio(@PathVariable("id")Long id){
         return recorService.getRecordatorio(id);
     }
 
     @PostMapping(path = "/{clienteId}")
-    public boolean post(@PathVariable Long clienteId, @RequestBody Recordatorio recor){
+    public boolean createRecordatorio(@PathVariable Long clienteId, @RequestBody Recordatorio recor){
         return recorService.createRecordatorio(clienteId, recor);
     }
 
     @PutMapping(path = "/{id}")
-    public Recordatorio update(@RequestBody Recordatorio request, @PathVariable("id") Long id){
+    public Recordatorio updateRecordatorio(@RequestBody Recordatorio request, @PathVariable("id") Long id){
         return recorService.updateRecordatorio(request, id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public boolean delete(@PathVariable("id") Long id){
+    public boolean deleteRecordatorio(@PathVariable("id") Long id){
         return recorService.deleteRecordatorio(id);
     }
 

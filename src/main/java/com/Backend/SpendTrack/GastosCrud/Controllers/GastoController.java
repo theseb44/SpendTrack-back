@@ -17,27 +17,27 @@ public class GastoController {
     private GastosServices gastosService;
 
     @GetMapping
-    public List<Gastos> getAllPresupuestos() {
+    public List<Gastos> getAllGastos() {
         return gastosService.getAllGasto();
     }
 
     @GetMapping("/{id}")
-    public Gastos getPresupuestoById(@PathVariable Long id) {
+    public Gastos getGastoById(@PathVariable Long id) {
         return gastosService.getGastoById(id);
     }
 
     @PostMapping("/{clienteId}")
-    public Gastos createPresupuesto(@PathVariable Long clienteId, @RequestBody Gastos gastos) {
+    public Gastos createGasto(@PathVariable Long clienteId, @RequestBody Gastos gastos) {
         return gastosService.createGasto(clienteId, gastos);
     }
 
     @PutMapping("/{id}")
-    public Gastos updatePresupuesto(@PathVariable Long id, @RequestBody Gastos gastos) {
+    public Gastos updateGasto(@PathVariable Long id, @RequestBody Gastos gastos) {
         return gastosService.updateGasto(id, gastos);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePresupuesto(@PathVariable Long id) {
+    public void deleteGasto(@PathVariable Long id) {
         gastosService.deleteGasto(id);
     }
 
