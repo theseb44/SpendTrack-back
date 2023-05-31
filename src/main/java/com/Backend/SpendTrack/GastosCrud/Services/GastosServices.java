@@ -67,8 +67,13 @@ public class GastosServices {
         if(!validarGastos(gasto)){return null;}
         if(!buscar(id)){return null;}
         try {
-            gasto.setId(id);
-            return gastoRepo.save(gasto);
+            Gastos gastoActualizado = gastoRepo.findById(id).get();
+            gastoActualizado.setCantidad(gasto.getCantidad());
+            gastoActualizado.setTipoPago(gasto.getTipoPago());
+            gastoActualizado.setDescripcion(gasto.getDescripcion());
+            gastoActualizado.setFecha(gasto.getFecha());
+            gastoActualizado.setCategoria(gasto.getCategoria());
+            return gastoRepo.save(gastoActualizado);
         }catch (Exception e){
             throw new RuntimeException("Ocurrio un error al actualizar el gasto",e);
         }

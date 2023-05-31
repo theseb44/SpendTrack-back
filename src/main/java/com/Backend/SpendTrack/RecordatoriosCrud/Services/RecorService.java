@@ -69,8 +69,10 @@ public class RecorService {
         if(!buscar(id)){return null;}
         if(!validarRecordatorio(request)){return null;}
         try{
-            request.setId(id);
-            return iRecordatorios.save(request);
+            Recordatorio recorActualizado = iRecordatorios.findById(id).get();
+            recorActualizado.setTitulo(request.getTitulo());
+            recorActualizado.setDescripcion(request.getDescripcion());
+            return iRecordatorios.save(recorActualizado);
         }catch (Exception e){
             throw new RuntimeException("Ocurrio en error al actualizar el recordatorio", e);
         }

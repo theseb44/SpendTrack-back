@@ -67,8 +67,12 @@ public class PresupuestoService {
         if(!validarPresupuesto(presupuesto)){return null;}
         if (!buscar(id)){return null;}
         try {
-            presupuesto.setId(id);
-            return presupuestoRepository.save(presupuesto);
+            Presupuesto presupuestoActualizado = presupuestoRepository.findById(id).get();
+            presupuestoActualizado.setFecha(presupuesto.getFecha());
+            presupuestoActualizado.setCategoria(presupuesto.getCategoria());
+            presupuestoActualizado.setDescripcion(presupuesto.getDescripcion());
+            presupuestoActualizado.setCantidad(presupuesto.getCantidad());
+            return presupuestoRepository.save(presupuestoActualizado);
         }catch (Exception e){
             throw new RuntimeException("Ocurrio en error al actualizar el presupuesto", e);
         }
